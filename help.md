@@ -11,7 +11,7 @@
   - Every interaction after that, suhaib will just endlessly scream for help and may call the player stupid if they are a girl
   - Once freed, suhaib will give a key he "thought was useless" to the player, earning them one of the needed keys to finish the game
   - Suhaib will then proceed to appear in different rooms throughout the game and says random lines when approached.
-  - Suhaib introduces himself to the player as a computer engineer, which is important as suhaib can help the player get a key faster (By reparing the old radio).
+  - Suhaib introduces himself to the player as a computer engineer, which is important as suhaib can help the player get a key faster (By repairing the old radio).
 - The Masked Writer (Found in the Study)
   - The Masked Writer is only found in their room at night. First interaction will be the Masked Writer noticing the player, then rushing at them causing the player to immediately flee the room. 
   - The player will note to self to ask the butler about the masked writer. Once asked, the butler will reveal that the masked writer only sits in their office at night. To get into the office, the butler will tell you to talk to him in the morning.
