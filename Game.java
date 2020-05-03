@@ -7,10 +7,10 @@ public class Game {
     public Output out = new Output();
 
     public static void main(String[] args)
-    {      
-        // while(true)
-        // {
-            
-        // }
+    {   
+        while(true)
+        {
+                        
+        }
     }
 }
