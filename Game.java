@@ -8,10 +8,10 @@ public class Game {
 
     public static void main(String[] args)
     {   
-        // NoteObject no = new NoteObject();     
-        // while(true)
-        // {
+        NoteObject no = new NoteObject();     
+        while(true)
+        {
             
-        // }
+        }
     }
 }
