@@ -7,8 +7,7 @@ public class Game {
     public Output out = new Output();
 
     public static void main(String[] args)
-    {   
-        // NoteObject no = new NoteObject();     
+    {      
         // while(true)
         // {
             
