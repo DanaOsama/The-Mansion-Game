@@ -119,6 +119,10 @@ switch (command)
 - rest (auto skips to the next day/night cycle)
 - help
 
+
+## Template Design Pattern
+- Implemented in the description of each room.
+
 ## Classes w/ Notes
 
 ### Ticker.java

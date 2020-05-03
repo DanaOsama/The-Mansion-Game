@@ -1,17 +1,23 @@
 import java.util.ArrayList;
-abstract public class Scene implements Runnable {
+abstract public class Scene implements Runnable, Observer {
+	
     protected String name;
     protected Thread currentThread;
 	protected ArrayList<Object> objects = new ArrayList<Object>();
 	protected Output out;
+	protected int currentState = 0;
+	protected Ticker tick;
 
 	//Constructor
-	public Scene(String n, Output o)
+	public Scene(String n, Output o, Ticker t)
 	{
 		this.name = n;
 		this.out = o;
 		this.currentThread = new Thread(this);
 		this.currentThread.start();
+		tick = t;
+		t.registerObserver(this);
+
 	}
 
 	//Scenes
@@ -41,8 +47,59 @@ abstract public class Scene implements Runnable {
 		out.println("Cannot go west, there is nothing there.");	
 	}
 	
+	//Description functions
+	void printDescription()
+	{
+		this.describeSelf();
+		this.describeObjects();
+		this.describeSurroundings();
+	}
+
+	abstract protected void describeSelf();
+	
+	protected void describeObjects()
+	{
+		// If there are no objects in the scene
+		if (objects.size() == 0)
+		{
+			out.println("Nothing useful here.");
+		}
+		else
+		{
+			out.print(" ");
+			for(int i = 0; i < objects.size(); i++)
+			{
+				out.print(objects.get(i).getSceneDescription() + " ");
+			}
+			out.println("");
+		}
+	}
+	
+	protected void describeSurroundings()
+	{
+		if (north != null)
+		{
+			out.println(north.getName() + " is in the north.");
+		}
+
+		if (east != null)
+		{
+			out.println(east.getName() + " is in the east.");
+		}
+
+		if (south != null)
+		{
+			out.println(south.getName() + " is in the south.");
+		}
+		
+		if(west != null)
+		{
+			out.println(south.getName() + " is in the west.");
+		}
+	}
+
     //Run this only once with inital list of objects
-	abstract void loadObjects();
+	abstract protected void loadObjects();
 
 	boolean findObject(String n)
 	{
@@ -82,5 +139,22 @@ abstract public class Scene implements Runnable {
 			//If the object is not found in the scene, throw an exception
             throw new Exception(o.getName() + " was not found in scene " + this.name);
 		}
+	}
+
+	String getName()
+	{
+		return this.name;
+	}
+	
+	void addObject(Object obj)
+	{
+		objects.add(obj);
+	}
+	
+	//Observer function 
+	public void update()
+	{
+		//Now that a tick happened, let's see if the state changed
+		if (this.tick.getState() != this.currentState) this.currentState = this.tick.getState();
 	}
 }
