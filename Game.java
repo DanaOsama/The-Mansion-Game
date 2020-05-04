@@ -16,7 +16,8 @@ public class Game {
         
         //The first scene is the supplyRoom
         currentScene = supplyRoom;
-
+        Player p = Player.getInstance("Youssef", out, currentScene);
+        
         //Welcome message to the game
         out.println("You wake up in a cold daze. You don't remember where you are, and you feel really sluggish. Slowly, you rise up to your feet.");
         while(true)
@@ -54,7 +55,7 @@ public class Game {
                                 try {
                                     Object temp = currentScene.getObject(argument);
                                     temp.read();
-                                } catch(Exception e) {System.out.println(e);}
+                                } catch(Exception e) {e.printStackTrace();}
                             }
                             else
                             {
@@ -66,13 +67,54 @@ public class Game {
                             out.println("Read what?");
                         }
                         break;
-                    case "get":
+                    case "inspect":
+                        if (argument.length() > 0)
+                        {
+                            if(p.findObject(argument))
+                            {
+                                try {
+                                    Object temp = p.getObject(argument);
+                                    temp.inspect();
+                                } catch (Exception e){e.printStackTrace();}
+                            }
+                            else
+                            {
+                                out.println("I couldn't find " + argument + " in my inventory.");
+                            }
+                        }
+                        else
+                        {
+                            out.println("Inspect what?");
+                        }
+                        break;
+                    case "take":
+                        if (argument.length() > 0)
+                        {
+                            if(currentScene.findObject(argument))
+                            {
+                                try {
+                                    (currentScene.getObject(argument)).take(p);
+                                } catch (Exception e) {e.printStackTrace();}
+                            }
+                            else
+                            {
+                                out.println("I couldn't find " + argument + " in the room.");
+                            }
+                        }
+                        else
+                        {
+                            out.println("Take what?");
+                        }
                         break;
                     case "look":
                         if (argument.equals("around"))
                         {
                             currentScene.printDescription();
                         }
+                        break;
+                    case "inv":
+                    case "inventory":
+                        p.listInventory();
                         break;
                     case "exit":
                         out.print("Are you sure you want to leave? [Y/N]: ");

@@ -36,19 +36,24 @@ abstract public class Object {
 	}
 
 	//Commands
-	void use()
+	public void inspect()
 	{
-		System.out.println(this.name + " cannot be used!");
+		out.println(this.getSceneDescription());
+	}
+
+	public void use()
+	{
+		out.println(this.name + " cannot be used!");
 	}
 
 	//Standard take command
-	// void take(Player p)
-	// {
-	// 	p.takeObject(this);
-    // }
+	public void take(Player p)
+	{
+		out.println(this.name + " cannot be taken!");
+    }
     
-    void read()
+   public void read()
     {
-        System.out.println(this.name + " cannot be read!");
+        out.println(this.name + " cannot be read!");
 	}
 }

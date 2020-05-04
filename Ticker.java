@@ -15,17 +15,17 @@ public class Ticker implements Runnable, Subject {
     }
 
     //Getters
-    public int getState()
+    synchronized public int getState()
     {
         return this.state;
     }
 
-    public int totalTicks()
+    synchronized public int totalTicks()
     {
         return this.totalTicks;
     }
 
-    public int stateTicks()
+    synchronized public int stateTicks()
     {
         return this.stateTicks;
     }
@@ -49,8 +49,8 @@ public class Ticker implements Runnable, Subject {
             observer.update();
         }
     }
-
-    public void tick()
+    
+    synchronized public void tick()
     {
         this.totalTicks++;
         this.stateTicks++;

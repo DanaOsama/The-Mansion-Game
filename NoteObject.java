@@ -12,4 +12,16 @@ public class NoteObject extends Object {
 	{
         out.println("You open the note with tired hands. It reads: " + this.content);
 	}
+
+	@Override
+	public void take(Player p)
+	{
+		p.takeItem(this, "An old note");
+	}
+
+	@Override
+	public void inspect()
+	{
+		out.println(this.getSceneDescription() + ". It reads: " + this.content);
+	}
 }

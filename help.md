@@ -70,21 +70,28 @@
 - Player can talk to characters
 
 ## Singleton Pattern
-Scenes and the player implement this pattern.s
+Scenes and the player implement this pattern.
 
 ## Command Pattern
 Our main contains a loop and a parser (still dont know if its a class). Our main reads different commands and executes them with the proper context.
 
 Psuedo code:
-```js
-input = readInput();
-command = input.split(" ")[0];
-object = input.split(" ")[1];
+```java
+if (parsedInput.hasMoreTokens())
+{
+  String command = parsedInput.nextToken();
+  String argument = "";
+  while (parsedInput.hasMoreTokens())
+  {
+    argument = argument + parsedInput.nextToken() + " ";
+  }
+  argument = argument.trim();
+}
 
 switch (command)
 {
   case "help":
-    //do help
+    //do helps
     break;
   case "use":
     //some checks first
@@ -118,6 +125,7 @@ switch (command)
 - status [status and any ongoing effects]
 - rest (auto skips to the next day/night cycle)
 - help
+- inspect (lists the description of an object in the inventory) 
 
 
 ## Template Design Pattern
