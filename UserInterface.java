@@ -24,7 +24,7 @@ public class UserInterface implements UISubject, UIObserver, Runnable {
 
     //Observer Method
     @Override
-    public void update(String s) {
+    synchronized public void update(String s) {
 		//Once we get a string to print, we will print them reprint the prompt
 		System.out.println("\r" + s);
 		System.out.print("> ");
