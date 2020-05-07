@@ -4,7 +4,6 @@ public class SupplyRoomKey extends Object {
         super(s, n, o, d);
     }
     
-
     @Override
     public void take(Player p)
     {

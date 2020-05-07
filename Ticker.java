@@ -1,15 +1,14 @@
 import java.util.ArrayList;
-public class Ticker implements Runnable, Subject {
+public class Ticker implements Runnable, UISubject {
     Thread currentThread;
-    private ArrayList<Observer> observers = new ArrayList<Observer>();
+    private ArrayList<UIObserver> observers = new ArrayList<UIObserver>();
     private int state = 0; //0 for day, 1 for night
     private int totalTicks = 0;
     private int stateTicks = 0;
-    private Output out;
 
-    public Ticker(Output o)
+    public Ticker()
     {
-        this.out = o;
+        //this.out = o;
         currentThread = new Thread(this);
         currentThread.start();
     }
@@ -30,23 +29,23 @@ public class Ticker implements Runnable, Subject {
         return this.stateTicks;
     }
 
-    public void registerObserver(Observer o)
+    public void registerObserver(UIObserver o)
     {
         observers.add(o);
     }
     
-    public void removeObserver(Observer o)
+    public void removeObserver(UIObserver o)
     {
         int i = observers.indexOf(o);
         if (i >= 0) observers.remove(i);
     }
     
-    public void notifyObservers()
+    public void notifyObservers(String s)
     {
         for( int i = 0; i < observers.size(); i++)
         {
-            Observer observer = (Observer) observers.get(i);
-            observer.update();
+            UIObserver observer = (UIObserver) observers.get(i);
+            observer.update(s);
         }
     }
     
@@ -55,7 +54,7 @@ public class Ticker implements Runnable, Subject {
         this.totalTicks++;
         this.stateTicks++;
         
-        if (this.stateTicks == 20)
+        if (this.stateTicks == (10))
         {
             //Flip the state
             this.state = 1 - this.state;
@@ -64,22 +63,25 @@ public class Ticker implements Runnable, Subject {
             //Let's announce to the game
             if (this.state == 0)
             {
-                out.println("Suddenly, you hear the sounds of a grandfather clock. It is now morning.");
+                notifyObservers("Suddenly, you hear the sounds of a grandfather clock. It is now morning.");
             }
             else
             {
-                out.println("Suddenly, you hear the sounds of a grandfather clock. It is now night.");
+                notifyObservers("Suddenly, you hear the sounds of a grandfather clock. It is now night.");
             }
         }
-        
-        this.notifyObservers();
+        // this.notifyObservers();
     }
     
     public void run()
     {
         while (true)
         {
-            //do nothing
+            try
+            {
+                Thread.sleep(1000);
+                this.tick();
+            } catch(Exception e) { e.printStackTrace(); }
         }
     }
 }
