@@ -49,7 +49,7 @@ class SuhaibInitalMood extends InitialMood {
 	
 }
 
-abstract public class Character {
+abstract public class Character { //context
 	protected Scene currentScene;
 	protected String name;
 	InitialMood iM;
