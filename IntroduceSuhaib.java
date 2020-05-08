@@ -6,7 +6,8 @@ public class IntroduceSuhaib implements State {
 	}
 
 	public void next(Mood m) {
-		m.setMood(new HappySuhaib());
+		if (m.PlayerInRoom) m.setMood(new HappySuhaib());
+		else System.out.println("You left me alone :(");
 	}
 
 	public void printStatus() {
