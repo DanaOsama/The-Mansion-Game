@@ -1,7 +1,5 @@
 public interface State {
-
-	public void prev(Object o);
-	public boolean next(Object o);
+	public void prev(Mood m) throws Exception;
+	public void next(Mood m);
 	public void printStatus();
-	
 }
