@@ -2,20 +2,33 @@
 public class Mood {
 	private State mood;
 	
-	public void setMood(State mood)
+	boolean PlayerInRoom;
+	boolean Free = false;
+	
+	Mood(Suhaib s)
+	{
+		mood = new SuhaibInitialMood();
+	}
+	
+	Mood(Butler b)
+	{
+		mood = new ButlerInitialMood();
+	}
+	
+	public synchronized void setMood(State mood)
 	{
 		this.mood = mood;
 	}
 	
-	public void prevState() throws Exception {
+	public synchronized void prevState() throws Exception {
 		mood.prev(this);
 	}
 	
-	public void nextState() {
+	public synchronized void nextState() {
 		mood.next(this);
 	}
 	
-	public void printStatus() {
+	public synchronized void printStatus() {
 		mood.printStatus();
 	}
 }
