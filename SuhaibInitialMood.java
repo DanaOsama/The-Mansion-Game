@@ -2,7 +2,7 @@
 class SuhaibInitialMood extends InitialMood {
 	
 	public void next(Mood m) {
-		m.setMood(new Help());
+		m.setMood(new HelpSuhaib());
 	}
 
 	public void printStatus() {
