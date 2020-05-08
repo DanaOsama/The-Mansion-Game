@@ -8,7 +8,8 @@ public class HelpSuhaib implements State {
 	}
 
 	public void next(Mood m) {
-		m.setMood(new IntroduceSuhaib());
+		if(m.Free) m.setMood(new IntroduceSuhaib());
+		else System.out.println("Suhaib is still locked...");
 	}
 
 	public void printStatus() {
