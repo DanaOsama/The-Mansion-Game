@@ -1,3 +1,6 @@
 public interface Command {
-	void execute();
+	String execute();
+	void setObject(Object o);
+	void setPlayer(Player p);
+	String getHelp();
 }

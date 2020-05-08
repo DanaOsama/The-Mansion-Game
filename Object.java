@@ -2,14 +2,13 @@ abstract public class Object {
 	protected Scene currentScene;
 	protected String name;
 	protected String objectSceneDescription;
-	protected Output out;
+	protected UserInterface ui;
 
 	//Constructor
-	public Object(Scene s, String n, Output o, String d)
+	public Object(Scene s, String n, String d)
 	{
         this.currentScene = s;
 		this.name = n;
-		this.out = o;
 		this.objectSceneDescription = d;
 	}
 
@@ -34,26 +33,37 @@ abstract public class Object {
 	{
 		return this.objectSceneDescription;
 	}
-
-	//Commands
-	public void inspect()
+	//Returns the name of the scene the object is currently in
+	public String getSceneName()
 	{
-		out.println(this.getSceneDescription());
+		return this.currentScene.getName();
 	}
 
-	public void use()
+	//Commands
+	public String inspect()
 	{
-		out.println(this.name + " cannot be used!");
+		return this.getSceneDescription();
+	}
+
+	//to use an object, it should be in the player's inventory
+	public String use(Player p)
+	{
+		return (this.name + " cannot be used!");
 	}
 
 	//Standard take command
-	public void take(Player p)
+	public String take(Player p)
 	{
-		out.println(this.name + " cannot be taken!");
-    }
-    
-   public void read()
+		return (this.name + " cannot be taken!");
+	}
+
+   public String read()
     {
-        out.println(this.name + " cannot be read!");
+        return (this.name + " cannot be read!");
+	}
+
+	public String eat(Player p)
+	{
+		return(this.name + " cannot be eaten!");
 	}
 }

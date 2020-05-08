@@ -1,6 +1,6 @@
 public class BucketObject extends Object {
-	public BucketObject(Scene s, String n, Output o, String d)
+	public BucketObject(Scene s, String n, String d)
 	{
-		super(s, n, o, d);
+		super(s, n, d);
 	}
 }

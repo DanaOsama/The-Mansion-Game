@@ -1,13 +1,24 @@
-public class useCommand implements Command {
-	private Object obj;
+public class UseCommand implements Command {
+    private Object obj;
+	private Player player;
 
-	public useCommand(Object o)
+	public void setObject(Object o)
 	{
 		this.obj = o;
-    }
-    
-    public void execute()
-    {
-        this.obj.use();
-    }
+	}
+
+	public void setPlayer(Player p)
+	{
+		this.player = p;
+	}
+
+	public String execute()
+	{
+		return this.obj.use(this.player);
+	}
+
+	public String getHelp()
+	{
+		return "use <object> - Lets you use items in your inventory.";
+	}
 }
