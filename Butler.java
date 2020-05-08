@@ -8,7 +8,7 @@ public class Butler extends Character{
 	private Butler() {
 		// SET SCENE FOR BUTLER
 		super(currentScene, "Butler");
-		m = new ButlerInitialMood();
+		m = new Mood(this);
 	}
 	
 	public void run() {
