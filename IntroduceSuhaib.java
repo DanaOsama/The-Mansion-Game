@@ -10,9 +10,8 @@ public class IntroduceSuhaib implements State {
 	}
 
 	public void printStatus() {
-		System.out.println("Whew! I thought I'd die in there! Take this useless key...Stupid digital doors!");
+		System.out.println("Whew! I thought I'd die in there! Stupid digital doors!");
 		System.out.println("Where are my manners :) My name is Suhaib, a computer engineer.. Ironic right?");
-		System.out.println("You'll see me around in different rooms, always ready to help :')");
 	}
 
 }
