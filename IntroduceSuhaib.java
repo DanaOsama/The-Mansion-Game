@@ -6,7 +6,7 @@ public class IntroduceSuhaib implements State {
 	}
 
 	public void next(Mood m) {
-		m.setMood(new Happy());
+		m.setMood(new HappySuhaib());
 	}
 
 	public void printStatus() {
