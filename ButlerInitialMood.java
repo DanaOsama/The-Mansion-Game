@@ -1,14 +1,12 @@
 class ButlerInitalMood extends InitialMood {
 
-	@Override
 	public void next(Mood m) {
-		// TODO Auto-generated method stub
+		if (keys[0]) 
+			m.setMood(new RandomButler());
 	}
 
-	@Override
 	public void printStatus() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Mentions the task of the player?? :')");
 	}
 	
 }
