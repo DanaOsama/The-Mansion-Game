@@ -14,7 +14,8 @@ public class HealingGhostBehavior extends GhostBehavior{
                 p.getCurrentScene().takeObject(p.getCurrentScene().getObject("apple"));
             } catch(Exception e) {e.printStackTrace();}
         }
-        p.getCurrentScene().addObject(new AppleObject(p.getCurrentScene(), "apple", "A lovely red apple lies in a basket on the floor.", 60));
+
+        p.getCurrentScene().addObject(new AppleObject(p.getCurrentScene(), "apple", "A lovely red apple lies in a basket on the floor.", (new Random().nextInt(5) + 1) * 60));
         g.notifyObservers(cc.GREEN_BOLD + "An apple has appeared in this room!" + cc.RESET);
 	}
 }

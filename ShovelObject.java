@@ -8,6 +8,10 @@ public class ShovelObject extends Object {
 	public String take(Player p)
 	{
 		p.addObject(this, "A shovel. Maybe it can be used to dig something up?");
+		try
+		{
+			this.currentScene.takeObject(this);
+		} catch(Exception e) {e.printStackTrace(); return e.toString();}
 		return cc.BLUE + "shovel has been added to your inventory." + cc.RESET;
 	}
 
@@ -18,6 +22,7 @@ public class ShovelObject extends Object {
 		{
 			this.currentScene.addObject(new AxeObject(this.currentScene, "axe", "On the ground lies a dirty axe."));
 			this.currentScene.addObject(new GoldenKey(this.currentScene, "golden key", "Laying in a now uncovered hole, there is a golden key."));
+			p.removeObject(this);
 			return cc.GREEN + "Using the shovel, you dig up some holes in the ground and uncover some items." + cc.RESET;
 		}
 		else

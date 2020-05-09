@@ -22,6 +22,13 @@ public class BackyardScene extends Scene {
 		this.addObject(new ShovelObject(this, "shovel", "Leaning on one of the walls, there is a shovel."));
     }
 
+    @Override
+    public void goSouth(Player p)
+    {
+        //Change the scene to the main room
+       this.notifyObservers(this.changeScene(this.south, p));
+    }
+
     public String getMoveDescription()
     {
         return "You open the back door and step into the backyard.";
@@ -29,6 +36,6 @@ public class BackyardScene extends Scene {
 
 	protected void describeSelf()
     {
-        this.notifyObservers("The backyard is bounded by high walls. There is a field of dead dandelions on the left. Looks like someone was trying to bury something there.");
+        this.notifyObservers(cc.WHITE_BOLD + "The backyard is bounded by high walls. There is a field of dead dandelions on the left. Looks like someone was trying to bury something there." + cc.RESET);
     }
 }

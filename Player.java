@@ -285,7 +285,7 @@ public class Player implements Runnable, UIObserver, UISubject {
                             break;
                         case "?":
                         case "help":
-                            notifyObservers("Commands:");
+                            notifyObservers(cc.BLUE + "Commands:");
                             for (int i = 0; i < objectCommands.length; i++) {
                                 notifyObservers(" * " + objectCommands[i].getHelp());
                             }
@@ -298,7 +298,7 @@ public class Player implements Runnable, UIObserver, UISubject {
                             // System commands
                             notifyObservers(" * rest - This will skip to the next day/night state.");
                             notifyObservers(" * help/? - I wonder what this command does...");
-                            notifyObservers(" * exit - Well, exits the game.");
+                            notifyObservers(" * exit - Well, exits the game." + cc.RESET);
                             break;
                         case "exit":
                             notifyObservers(cc.BLUE_BOLD + "Thank you for playing our game. Exiting..." + cc.RESET);

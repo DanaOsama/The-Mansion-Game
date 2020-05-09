@@ -16,7 +16,7 @@ public class AppleObject extends Object implements Observer {
 		{
 			p.hurt(cc.RED + "You bite into the apple but immediately spit it out in disgust. It is rotten!" + cc.RESET);
 			try {
-				this.currentScene.takeObject(this);
+				p.removeObject(this);
 				return "You throw the apple away.";
 			} catch (Exception e) { e.printStackTrace(); return e.toString();}
 		}
@@ -24,7 +24,7 @@ public class AppleObject extends Object implements Observer {
 		{
 			p.heal(cc.GREEN + "You bite into the apple and it's taste fills your mouth. Delicious!" + cc.RESET);
 			try {
-				this.currentScene.takeObject(this);
+				p.removeObject(this);
 				return "You finish eating the apple.";
 			} catch (Exception e) { e.printStackTrace(); return e.toString();}
 		}
@@ -43,11 +43,11 @@ public class AppleObject extends Object implements Observer {
 		}
 		if (this.isRotten)
 		{
-			p.addObject(this, "An apple. Eating it heals you a heart! This one might be rotten though.");
+			p.takeItem(this, "An apple. Eating it heals you a heart! This one might be rotten though.");
 		}
 		else
 		{
-			p.addObject(this, "An apple. Eating it heals you a heart!");
+			p.takeItem(this, "An apple. Eating it heals you a heart!");
 		}
 		return cc.BLUE + "apple has been added to your inventory." + cc.RESET;
 	}

@@ -50,4 +50,6 @@ abstract public class Character implements Runnable, UISubject {
 
 	public abstract void run();
 	public abstract String talkTo();
+	public void setActivated(boolean b){};
+	public void setFreed(boolean b){};
 }

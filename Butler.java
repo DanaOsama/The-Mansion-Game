@@ -78,6 +78,7 @@ class Butler extends Character {
 				try {
 					this.player.removeObject(this.player.getObject("golden key"));
 				} catch (Exception e) { e.printStackTrace(); }
+				this.playerHasNewKey = true;
 				this.Keys[this.numKeys] = true;
 				this.numKeys++;
 				this.notifyObservers(cc.YELLOW + "The butler says: " + cc.RESET + cc.CYAN + "'I see you have a golden key, I will take that. You have given me " + this.numKeys + " keys so far. Keep going.'" + cc.RESET);
@@ -88,7 +89,8 @@ class Butler extends Character {
 				}
 				else
 				{
-					return cc.YELLOW + "All keys collected!" + cc.RESET;
+					this.currentScene.south.setBehavior(new UnlockedSceneBehavior(this.currentScene.south, this.player));
+					return cc.GREEN + "All keys collected!" + cc.RESET + "\n" + cc.YELLOW + "The butler turns the three golden keys, and the door to the outside unlocks." + cc.RESET;
 				}
 			}
 			else

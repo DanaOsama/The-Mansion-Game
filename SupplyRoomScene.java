@@ -28,9 +28,11 @@ public class SupplyRoomScene extends Scene {
 
     protected void loadObjects()
     {
+        //TODO: Give note an actual content
         //Creating objects in the scene
-        NoteObject noteSupplyRoom = new NoteObject(instance, "old note", "WELCOME MESSAGE HERE", "There is an old note lying on the floor.");
-        BucketObject bucket = new BucketObject(instance, "bucket", "In the corner, there is a bucket overflowing with the water dripping from the ceiling.");
+        String contents = "Welcome to The Old House. You are trapped here, for our amusement. Collect the three Golden Keys to find your way out. Good luck. Or not.";
+        NoteObject noteSupplyRoom = new NoteObject(instance, "old note", contents, "There is an old note lying on the floor.");
+        BucketObject bucket = new BucketObject(instance, "bucket", "In the corner, there is an empty bucket slowly being filled with water from the ceiling.");
         BookObject bookSupplyRoom = new BookObject(instance, "book", "On a shelf lies a book suspiciously out of place.");
 
         //Adding the object to the scene

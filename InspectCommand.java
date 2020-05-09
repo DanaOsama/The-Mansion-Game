@@ -1,6 +1,6 @@
 public class InspectCommand implements Command {
 	private Object obj;
-
+	private ConsoleColors cc = new ConsoleColors();
 	public void setPlayer(Player p){};
 	public void setCharacter(Character c){};
 
@@ -10,7 +10,7 @@ public class InspectCommand implements Command {
 
 	public String execute()
 	{
-		return this.obj.getSceneDescription();
+		return cc.YELLOW + this.obj.getSceneDescription() + cc.RESET;
 	}
 
 	public String getHelp()

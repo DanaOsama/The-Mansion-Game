@@ -14,6 +14,10 @@ public class GoldenKey extends Object {
 		else
 		{
 			p.addObject(this, "A golden key. You should give this to the butler at the Main Entrance.");
+			try
+			{
+				this.currentScene.takeObject(this);
+			} catch (Exception e) { e.printStackTrace(); }
 			return cc.GREEN + "You got a golden key!" + cc.RESET;
 		}
 	}
