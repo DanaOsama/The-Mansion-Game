@@ -242,6 +242,7 @@ public class Player implements Runnable, UIObserver, UISubject {
                                     try {
                                         Object temp = this.getObject(argument);
                                         this.pcp.setObject(temp);
+                                        this.pcp.setPlayer(this);
                                         this.notifyObservers(this.pcp.executeCommand(5));
                                     } catch (Exception e) {
                                         e.printStackTrace();
@@ -252,9 +253,6 @@ public class Player implements Runnable, UIObserver, UISubject {
                             } else {
                                 notifyObservers("Use what?");
                             }
-                            break;
-                        case "hurt":
-                            this.hurt("Ouch!");
                             break;
                         // Character commands
                         case "talkto":
