@@ -5,7 +5,7 @@ abstract public class Character implements Runnable{
 	Mood m;
 
 	public Character(Scene currentScene, String name) {
-		Thread t = new Thread();
+		Thread t = new Thread(this);
 		this.currentScene = currentScene;
 		this.name = name;
 		t.start();
