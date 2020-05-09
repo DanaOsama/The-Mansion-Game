@@ -8,7 +8,7 @@ class Butler extends Character{
 	
 	
 	private Butler() {
-		// SET SCENE FOR BUTLER
+		// SET SCENE FOR BUTLER??
 		super("Butler");
 	}
 	
