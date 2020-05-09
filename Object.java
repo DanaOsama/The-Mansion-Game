@@ -3,6 +3,7 @@ abstract public class Object {
 	protected String name;
 	protected String objectSceneDescription;
 	protected UserInterface ui;
+	protected ConsoleColors cc = new ConsoleColors();
 
 	//Constructor
 	public Object(Scene s, String n, String d)
@@ -48,22 +49,22 @@ abstract public class Object {
 	//to use an object, it should be in the player's inventory
 	public String use(Player p)
 	{
-		return (this.name + " cannot be used!");
+		return (cc.RED + this.name + " cannot be used!" + cc.RESET);
 	}
 
 	//Standard take command
 	public String take(Player p)
 	{
-		return (this.name + " cannot be taken!");
+		return (cc.RED + this.name + " cannot be taken!" + cc.RESET);
 	}
 
    public String read()
     {
-        return (this.name + " cannot be read!");
+        return (cc.RED + this.name + " cannot be read!" + cc.RESET);
 	}
 
 	public String eat(Player p)
 	{
-		return(this.name + " cannot be eaten!");
+		return(cc.RED + this.name + " cannot be eaten!" + cc.RESET);
 	}
 }

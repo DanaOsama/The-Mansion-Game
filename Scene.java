@@ -10,6 +10,8 @@ abstract public class Scene implements UISubject {
 	protected UserInterface ui;
 	private Ticker tick;
 	protected SceneBehavior behavior;
+	protected ConsoleColors cc = new ConsoleColors();
+	protected ArrayList<Character> characters = new ArrayList<Character>();
 
 	// Constructor
 	public Scene(String n, UserInterface UI, Ticker t) {
@@ -74,6 +76,7 @@ abstract public class Scene implements UISubject {
 	void printDescription() {
 		this.describeSelf();
 		this.describeObjects();
+		this.describeCharacters();
 		this.describeSurroundings();
 	}
 
@@ -82,32 +85,48 @@ abstract public class Scene implements UISubject {
 	protected void describeObjects() {
 		// If there are no objects in the scene
 		if (objects.size() == 0) {
-			this.notifyObservers("Nothing useful here.");
+			this.notifyObservers(cc.YELLOW + "Nothing useful here." + cc.RESET);
 		} else {
 			for (int i = 0; i < objects.size(); i++) {
-				this.notifyObservers(objects.get(i).getSceneDescription());
+				this.notifyObservers(cc.BLUE + objects.get(i).getSceneDescription() + cc.RESET);
 			}
 		}
 	}
 
 	protected void describeSurroundings() {
 		if (north != null) {
-			this.notifyObservers(north.getName() + " is in the north.");
+			this.notifyObservers(cc.YELLOW + north.getName() + " is in the north." + cc.RESET);
 		}
 
 		if (east != null) {
-			this.notifyObservers(east.getName() + " is in the east.");
+			this.notifyObservers(cc.YELLOW + east.getName() + " is in the east." + cc.RESET);
 		}
 
 		if (south != null) {
-			this.notifyObservers(south.getName() + " is in the south.");
+			this.notifyObservers(cc.YELLOW + south.getName() + " is in the south." + cc.RESET);
 		}
 
 		if (west != null) {
-			this.notifyObservers(west.getName() + " is in the west.");
+			this.notifyObservers(cc.YELLOW + west.getName() + " is in the west." + cc.RESET);
 		}
 	}
 
+	protected void describeCharacters()
+	{
+		if (this.characters.size() > 0)
+		{
+			for (int i = 0; i < this.characters.size(); i++)
+			{
+				this.notifyObservers(this.characters.get(i).getSceneDescription());
+			}
+		}
+		else
+		{
+			this.notifyObservers(cc.CYAN + "There is no one here other than you." + cc.RESET);
+		}
+	}
+
+	// Object related functions
 	// Run this only once with initial list of objects
 	abstract protected void loadObjects();
 
@@ -141,6 +160,55 @@ abstract public class Scene implements UISubject {
 		}
 	}
 
+	void addObject(Object obj) {
+		obj.setScene(this);
+		objects.add(obj);
+	}
+
+	//Functions related to characters
+	public boolean findCharacter(String s)
+	{
+		for (int i = 0; i < this.characters.size(); i++)
+		{
+			if (this.characters.get(i).getName().equals(s))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Character getCharacter(String s) throws Exception
+	{
+		for (int i = 0; i < characters.size(); i++) {
+			if (s.equals(characters.get(i).getName())) {
+				return characters.get(i);
+			}
+		}
+
+		// If the object is not found in the scene, throw an exception
+		throw new Exception(s + " was not found in scene " + this.name);
+	}
+
+	public void removeCharacter(Character c) throws Exception
+	{
+		int i = this.characters.indexOf(c);
+		if (i >= 0)
+		{
+			this.characters.remove(c);
+		}
+		else
+		{
+			throw new Exception(c.getName() + " was not found in scene " + this.name);
+		}
+	}
+
+	public void addCharacter(Character c)
+	{
+		this.characters.add(c);
+	}
+
+	//Getters
 	String getName() {
 		return this.name;
 	}
@@ -148,10 +216,6 @@ abstract public class Scene implements UISubject {
 	Ticker getTicker()
 	{
 		return this.tick;
-	}
-
-	void addObject(Object obj) {
-		objects.add(obj);
 	}
 
 	// UISubject Methods

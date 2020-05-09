@@ -4,6 +4,7 @@ public class Ghost implements Observer, UISubject, Runnable {
 
     //Ghosts appear only during the night cycle of the game
     Scene[] scenes;
+    GhostBehavior[] behaviors = {new ScareGhostBehavior(), new HealingGhostBehavior(), new TeleportingGhostBehavior(), new IndifferentGhostBehavior()};
     Scene currentScene = null;
     GhostBehavior gh = null;
     Ticker time;
@@ -11,6 +12,7 @@ public class Ghost implements Observer, UISubject, Runnable {
     Thread currentThread;
     int sceneState = 0;
     ArrayList<UIObserver> uiObservers = new ArrayList<UIObserver>();
+    ConsoleColors cc = new ConsoleColors();
     public Ghost(Scene[] s, Ticker t, Player p, UserInterface ui)
     {
         this.time = t;
@@ -49,6 +51,13 @@ public class Ghost implements Observer, UISubject, Runnable {
         }
     }
 
+    //A getter for the SupplyRoom scene
+    public Scene getSupplyRoom()
+    {
+        //We know it is the first one
+        return this.scenes[0];
+    }
+
     public void run()
     {
         while (true)
@@ -59,25 +68,17 @@ public class Ghost implements Observer, UISubject, Runnable {
                 {
                     if (this.gh == null)
                     {
-                        int choice = new Random().nextInt(2);
+                        int choice = new Random().nextInt(this.behaviors.length);
                         this.currentScene = this.scenes[new Random().nextInt(this.scenes.length)];
-                        notifyObservers("A ghost has appeared in " + this.currentScene.getName() + "!");
-                        if (choice == 0)
-                        {
-                            this.gh = new ScareGhostBehavior();
-                        }
-                        else
-                        {
-                            this.gh = new IndifferentGhostBehavior();
-                        }
+                        notifyObservers(cc.CYAN_BOLD + "A ghost has appeared in " + this.currentScene.getName() + "!" + cc.RESET);
+                        this.gh = this.behaviors[choice];
                     }
                     else
                     {
                         if (this.player.getCurrentScene().getName().equals(this.currentScene.getName()))
                         {
                             //The player has entered a scene we are in. Time to do behavior
-                            //TODO: Create more behavior + make sure the behavior string is printed first (probably a different function)
-                            notifyObservers(gh.behave(this.player));
+                            gh.behave(this.player, this);
                             Thread.sleep(60000);
                             this.gh = null;
                         }
@@ -90,7 +91,7 @@ public class Ghost implements Observer, UISubject, Runnable {
                     {
                         this.currentScene = null;
                         this.gh = null;
-                        notifyObservers("As the sun rises over the house, the ghost disappears with one final scream.");
+                        notifyObservers(cc.CYAN_BOLD + "As the sun rises over the house, the ghost disappears with one final scream." + cc.RESET);
                     }
                 }
                 Thread.sleep(5000); //Sleep for 5 seconds

@@ -4,6 +4,6 @@ public class IndifferentGhostBehavior extends GhostBehavior{
 
     public void behave(Player p, Ghost g){
         int index = new Random().nextInt(mehThings.length);
-        g.notifyObservers("You have encountered a ghost! They look at you and say: " + this.mehThings[index]);
+        g.notifyObservers("You have encountered a ghost! They look at you and say: " + cc.YELLOW_BOLD + this.mehThings[index] + cc.RESET);
     }
 }

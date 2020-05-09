@@ -20,7 +20,8 @@ public class MainEntranceScene extends Scene {
 
 	public void loadObjects()
 	{
-		//nothing yet
+        this.addObject(new ClockObject(this, "watch", "On a small table, there is a watch."));
+        this.addObject(new AppleObject(this, "apple", "In a small basket on the ground, there is a red apple.", 60));
     }
 
     public void setBehavior(SceneBehavior b)

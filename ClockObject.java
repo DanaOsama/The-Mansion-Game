@@ -1,33 +1,22 @@
 public class ClockObject extends Object {
+    private Ticker tick;
     public ClockObject(Scene s, String n, String d)
     {
         super(s, n, d);
+        this.tick = s.getTicker();
     }
 
-    //TODO: FINISH THIS OBJECT
     @Override
     public String take(Player p)
     {
-        p.takeItem(this, "A black key. Maybe this can open one of the doors?");
+        p.takeItem(this, "A pocket watch. Maybe it can be used to tell the time?");
         return (this.getName() + " has been added to your inventory.");
     }
 
     @Override
     public String use(Player p)
     {
-        if (this.getSceneName().equals("Supply Room"))
-        {
-            try{
-                Object temp = p.getObject(this.getName());
-                this.currentScene.east.setBehavior(new UnlockedSceneBehavior(this.currentScene.east, p));
-                p.removeObject(temp);
-                return "You unlocked the door to the main entrance.";
-                //Change state of main entrance to unlocked :)
-            }catch(Exception e){return "Object not found!";}
-        }
-        else
-        {
-            return("I don't see how " + this.getName() + " can be used in this room.");
-        }
+        //When the object is used, we can now tell the player the number of seconds left
+        return "You look at the pocket watch. It tells you there are " + (300 - this.tick.stateTicks()) + " seconds left till " + ((this.tick.getState() == 0) ? "night" : "morning");
     }
 }

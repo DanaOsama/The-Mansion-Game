@@ -6,7 +6,7 @@ public class Ticker implements Runnable, UISubject, Subject {
     private int state = 0; //0 for day, 1 for night
     private int totalTicks = 0;
     private int stateTicks = 0;
-
+    private ConsoleColors cc = new ConsoleColors();
     public Ticker()
     {
         //this.out = o;
@@ -93,11 +93,11 @@ public class Ticker implements Runnable, UISubject, Subject {
             //Let's announce to the game
             if (this.state == 0)
             {
-                notifyObservers("Suddenly, you hear the sounds of a grandfather clock. It is now morning.");
+                notifyObservers(cc.YELLOW_BOLD + "Suddenly, you hear the sounds of a grandfather clock. It is now morning." + cc.RESET);
             }
             else
             {
-                notifyObservers("Suddenly, you hear the sounds of a grandfather clock. It is now night.");
+                notifyObservers(cc.YELLOW_BOLD + "Suddenly, you hear the sounds of a grandfather clock. It is now night." + cc.RESET);
             }
         }
         this.notifyObservers(); //Notify time observers

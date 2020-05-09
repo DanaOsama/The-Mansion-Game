@@ -10,6 +10,7 @@ public class Player implements Runnable, UIObserver, UISubject {
     private UserInterface ui;
     private int lives = 3;
     private String currentPlayerInput = null;
+    private ConsoleColors cc = new ConsoleColors();
     private Thread currentThread;
 
     // Control panels
@@ -26,8 +27,8 @@ public class Player implements Runnable, UIObserver, UISubject {
         this.registerObserver(this.ui);
         this.name = n;
         this.currentScene = s;
-        // this.currentThread = new Thread(this);
-        // this.currentThread.start();
+        this.currentThread = new Thread(this);
+        this.currentThread.start();
     }
 
     // Singleton design pattern
@@ -61,30 +62,50 @@ public class Player implements Runnable, UIObserver, UISubject {
     }
 
     public String getStatus() {
-        return "You are in the " + this.currentScene.getName() + ". You currently have " + this.inventory.size()
-                + " items in your inventory. You have " + this.lives + " hearts left.";
+        return cc.YELLOW_BOLD + "You are in the " + this.currentScene.getName() + ". You currently have " + this.inventory.size()
+                + " items in your inventory. You have " + this.lives + " hearts left." + cc.RESET;
+    }
+
+    public int getLives()
+    {
+        return this.lives;
     }
 
     public void hurt(String s)
     {
         this.lives--;
         this.notifyObservers(s);
-        this.notifyObservers("You have " + this.lives + " hearts left.");
-        if (this.lives == 0)
+        this.notifyObservers(cc.RED_BOLD + "You have " + this.lives + " hearts left." + cc.RESET);
+    }
+
+    public void heal(String s)
+    {
+        if (this.lives < 4)
         {
-            notifyObservers("Your body drops dead on the ground. GAME OVER.");
-            System.exit(0);
+            this.lives++;
+            this.notifyObservers(s);
+            this.notifyObservers(cc.GREEN_BOLD + "You have " + this.lives + " hearts now!" + cc.RESET);
+        }
+        else
+        {
+            this.notifyObservers(s);
+            this.notifyObservers(cc.GREEN_BOLD + "You already have the maximum of 5 hearts!" + cc.RESET);
         }
     }
 
     public void run() {
-        while (true) {
-            if (this.currentPlayerInput != null) {
-                System.out.println("Player input is not null :)");
+        /*
+            The empty print statement seen here is put to prevent some unusual behavior we have been experiencing
+            with having empty while loops inside of threads. For some reason, either Java is optimizing our code
+            and removing the while loops or the CPU never executes in this thread due to it being "stuck". This would
+            be fixed if we were allowed to implement semaphores, or if the player was not a thread. But because it is
+            required for a player to be a thread, we have implemented it this way.
+        */
+        while (this.getLives() > 0){System.out.print("");};
 
-                this.currentPlayerInput = null;
-            }
-        }
+        //Once the player has died, time to end the game
+        notifyObservers(cc.RED_BACKGROUND +  cc.WHITE_BOLD + "Your body drops dead on the ground. GAME OVER." + cc.RESET);
+        System.exit(0);
     }
 
     // Inventory functions
@@ -114,6 +135,7 @@ public class Player implements Runnable, UIObserver, UISubject {
     }
 
     void addObject(Object obj, String d) {
+        obj.setScene(this.currentScene);
         obj.setSceneDescription(d);
         inventory.add(obj);
     }
@@ -166,7 +188,7 @@ public class Player implements Runnable, UIObserver, UISubject {
             temp.update(s);
         }
     }
-    
+
     void setUserInterface(UserInterface UI) {
         this.ui = UI;
         this.ui.registerObserver(this);
@@ -198,7 +220,7 @@ public class Player implements Runnable, UIObserver, UISubject {
                                 e.printStackTrace();
                             }
                         } else {
-                            notifyObservers("I couldn't find " + argument + " in the room.");
+                            notifyObservers(cc.RED + "I couldn't find " + argument + " in the room." + cc.RESET);
                         }
                     } else {
                         notifyObservers("Read what?");
@@ -228,7 +250,7 @@ public class Player implements Runnable, UIObserver, UISubject {
                             this.scp.setPlayer(this);
                             this.scp.executeCommand(4);
                         } else {
-                            notifyObservers("Invalid direction.");
+                            notifyObservers(cc.RED + "Invalid direction." + cc.RESET);
                         }
                     } else {
                         notifyObservers("Go where?");
@@ -247,7 +269,7 @@ public class Player implements Runnable, UIObserver, UISubject {
                                 e.printStackTrace();
                             }
                         } else {
-                            notifyObservers("I couldn't find " + argument + " in the room.");
+                            notifyObservers(cc.RED + "I couldn't find " + argument + " in the room." + cc.RESET);
                         }
                     } else {
                         notifyObservers("Take what?");
@@ -270,7 +292,7 @@ public class Player implements Runnable, UIObserver, UISubject {
                                 e.printStackTrace();
                             }
                         } else {
-                            notifyObservers("I could not find " + argument + " in my inventory.");
+                            notifyObservers(cc.RED + "I could not find " + argument + " in my inventory." + cc.RESET);
                         }
                     } else {
                         notifyObservers("Inspect what?");
@@ -287,12 +309,13 @@ public class Player implements Runnable, UIObserver, UISubject {
                             try {
                                 Object temp = this.getObject(argument);
                                 this.pcp.setObject(temp);
+                                this.pcp.setPlayer(this);
                                 this.notifyObservers(this.pcp.executeCommand(4));
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         } else {
-                            notifyObservers("I couldn't find " + argument + " in my inventory.");
+                            notifyObservers(cc.RED + "I couldn't find " + argument + " in my inventory." + cc.RESET);
                         }
                     } else {
                         notifyObservers("Eat what?");
@@ -309,11 +332,14 @@ public class Player implements Runnable, UIObserver, UISubject {
                                 e.printStackTrace();
                             }
                         } else {
-                            notifyObservers("I couldn't find " + argument + " in my inventory.");
+                            notifyObservers(cc.RED + "I couldn't find " + argument + " in my inventory." + cc.RESET);
                         }
                     } else {
                         notifyObservers("Use what?");
                     }
+                    break;
+                case "hurt":
+                    this.hurt("Ouch!");
                     break;
                 // Character commands
                 case "talkto":
@@ -341,10 +367,10 @@ public class Player implements Runnable, UIObserver, UISubject {
                     notifyObservers(" * exit - Well, exits the game.");
                     break;
                 case "exit":
-                    notifyObservers("Thank you for playing our game. Exiting...");
+                    notifyObservers(cc.BLUE_BOLD + "Thank you for playing our game. Exiting..." + cc.RESET);
                     System.exit(0);
                 default:
-                    notifyObservers("Invalid command.");
+                    notifyObservers(cc.RED + "Invalid command." + cc.RESET);
             }
         }
     }

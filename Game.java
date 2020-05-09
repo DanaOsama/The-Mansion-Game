@@ -130,7 +130,6 @@
 //                 }
 //             }
 
-//             //TODO: Tick only on correct syntax commands
 //             tick.tick();
 //         }
 //     }

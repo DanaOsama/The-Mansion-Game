@@ -46,6 +46,6 @@ public class SupplyRoomScene extends Scene {
 
     protected void describeSelf()
     {
-        this.notifyObservers("It looks like you are in a supply room of some sorts. There are things littered everywhere. The sound of water dripping can be heard nearby.");
+        this.notifyObservers(cc.WHITE_BOLD + "It looks like you are in a supply room of some sorts. There are things littered everywhere. The sound of water dripping can be heard nearby." + cc.RESET);
     }
 }
