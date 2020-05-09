@@ -12,6 +12,8 @@ public class EatCommand implements Command {
 		this.player = p;
 	}
 
+	public void setCharacter(Character c){};
+
 	public String execute()
 	{
 		return this.obj.eat(this.player);

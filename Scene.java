@@ -7,7 +7,7 @@ abstract public class Scene implements UISubject {
 	protected ArrayList<Object> objects = new ArrayList<Object>();
 	protected ArrayList<UIObserver> uiObservers = new ArrayList<UIObserver>();
 	protected int currentState = 0;
-	protected UserInterface ui;
+	public UserInterface ui;
 	private Ticker tick;
 	protected SceneBehavior behavior;
 	protected ConsoleColors cc = new ConsoleColors();

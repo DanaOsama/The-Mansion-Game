@@ -7,6 +7,7 @@ public class StatusCommand implements Command {
 	}
 
 	public void setObject(Object o){};
+	public void setCharacter(Character c){};
 
 	public String execute()
 	{

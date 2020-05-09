@@ -10,6 +10,7 @@ public class SupplyRoomKey extends Object {
         p.takeItem(this, "A black key. Maybe this can open one of the doors?");
         return (this.cc.BLUE + this.getName() + " has been added to your inventory." + cc.RESET);
     }
+
     @Override
     public String use(Player p)
     {

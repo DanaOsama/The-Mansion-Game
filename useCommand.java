@@ -12,6 +12,8 @@ public class UseCommand implements Command {
 		this.player = p;
 	}
 
+	public void setCharacter(Character c){};
+
 	public String execute()
 	{
 		return this.obj.use(this.player);

@@ -9,7 +9,14 @@ public class Main {
 		supplyRoom.setEast(mainScene);
 		mainScene.setWest(supplyRoom);
 		Scene[] allScenes = {supplyRoom, mainScene};
+
+		//Player
 		Player p = Player.getInstance("player", supplyRoom, ui);
+
+		//Ghost
 		Ghost g = new Ghost(allScenes, tick, p, ui);
+
+		//Create the characters
+		Butler butler = Butler.getInstance(mainScene, "Near the door leading outside, there stands a butler with an ominous atmosphere.", p);
     }
 }

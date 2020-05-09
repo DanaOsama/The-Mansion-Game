@@ -12,6 +12,7 @@ public class ReadCommand implements Command {
 	}
 
 	public void setPlayer(Player p){};
+	public void setCharacter(Character c){};
 
 	public String getHelp()
 	{

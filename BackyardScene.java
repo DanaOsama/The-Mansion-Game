@@ -1,9 +1,8 @@
 public class BackyardScene extends Scene {
-	protected static BackyardScene instance;
-
+    protected static BackyardScene instance;
     private BackyardScene(String n, UserInterface ui, Ticker t)
     {
-        super(n,ui,t);
+        super(n, ui, t);
     }
 
     //implementing the Singleton design pattern.
@@ -20,8 +19,13 @@ public class BackyardScene extends Scene {
 
 	public void loadObjects()
 	{
-		//nothing yet
-	}
+		this.addObject(new ShovelObject(this, "shovel", "Leaning on one of the walls, there is a shovel."));
+    }
+
+    public String getMoveDescription()
+    {
+        return "You open the back door and step into the backyard.";
+    }
 
 	protected void describeSelf()
     {

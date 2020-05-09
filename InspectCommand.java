@@ -2,6 +2,7 @@ public class InspectCommand implements Command {
 	private Object obj;
 
 	public void setPlayer(Player p){};
+	public void setCharacter(Character c){};
 
 	public void setObject(Object o){
 		this.obj = o;

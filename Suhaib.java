@@ -2,8 +2,8 @@ import java.util.Random;
 
 public class Suhaib extends Character {
 
-	public Suhaib(Scene currentScene, String name) {
-		super(currentScene, name);
+	public Suhaib(Scene currentScene, String name, String s) {
+		super(currentScene, name, s);
 		m = new Mood(this);
 		m.PlayerInRoom = true;
 	}
@@ -13,11 +13,12 @@ public class Suhaib extends Character {
 		currentScene = scene;
 	}
 
-	public DiningRoomKey DrinkWater(BucketObject o)
+	//TODO: Give player final golden key
+	public void DrinkWater(BucketObject o)
 	{
-		System.out.println("This "+ o + "of water is very tasty!");
-		System.out.println("Here is a key I found in the dining room.");
-		return new DiningRoomKey();
+		notifyObservers("This "+ o + "of water is very tasty!");
+		notifyObservers("Here is a key I found in the dining room.");
+		// return new DiningRoomKey();
 	}
 
 	public void run()

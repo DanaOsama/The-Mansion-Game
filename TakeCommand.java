@@ -12,6 +12,8 @@ public class TakeCommand implements Command {
 		this.player = p;
 	}
 
+	public void setCharacter(Character c){};
+
 	public String execute()
 	{
 		return this.obj.take(this.player);

@@ -1,5 +1,5 @@
 //strategy
-public abstract class InitialMood implements State { 
+public abstract class InitialMood implements State {
 
 	//Common for Suhaib and Butler
 	public void prev(Mood m) {
@@ -11,6 +11,5 @@ public abstract class InitialMood implements State {
 	public abstract void next(Mood m);
 
 	//Unique to Suhaib and Butler
-	public abstract void printStatus();
-	
+	public abstract String printStatus();
 }
