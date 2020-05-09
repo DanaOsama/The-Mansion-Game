@@ -7,9 +7,8 @@ class Butler extends Character{
 	//MainRoomKeyObject?
 	
 	
-	private Butler() {
-		// SET SCENE FOR BUTLER??
-		super("Butler");
+	private Butler(currentScene scene) {
+		super(scene, "Butler");
 	}
 	
 	public void run() {
@@ -19,9 +18,9 @@ class Butler extends Character{
 		}
 	}
 	
-	public static Butler getInstance() {
+	public static Butler getInstance(currentScene scene) {
 		if (instance == null) {
-			instance = new Butler();
+			instance = new Butler(currentScene scene);
 		}
 		return instance;
 	}
@@ -53,6 +52,10 @@ class Butler extends Character{
 			printStatus();
 		}
 		
+	}
+	
+	public void talkToButler() {
+		printStatus();
 	}
 	
 	/* public MainRoomKeyObject getMainRoomKey() {
