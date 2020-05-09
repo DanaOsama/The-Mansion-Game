@@ -15,7 +15,7 @@ class Butler extends Character{
 	public void run() {
 		while(true) {
 
-			 
+			 //no.. just.. no.
 		}
 	}
 	
@@ -55,25 +55,13 @@ class Butler extends Character{
 		
 	}
 	
-	public void getMainRoomKey() {
+	/* public MainRoomKeyObject getMainRoomKey() {
 		if (Keys[2] == true) {
-			System.out.println("Yes ");
-			//return MainRoomKeyObjectVar;
+			return MainRoomKeyObjectVar;
 		} else {
 			System.out.println("You need to collect all three keys to get the Main Room key! ");
 		}
 		
-	}
-
-	
-	void delay(int ms)
-	{
-		try {
-			Thread.sleep(ms);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	} */
 	
 }
